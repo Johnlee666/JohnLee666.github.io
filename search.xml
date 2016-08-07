@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title><![CDATA[property,synthesize,dynamic学习笔记]]></title>
+      <url>zhanlee.com/2016/08/06/property,synthesize,dynamic%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+      <content type="html"><![CDATA[<h1 id="property"><a href="#property" class="headerlink" title="property"></a>property</h1><p>property的作用是声明属性的setter方法和getter方法，并且在一般情况下Xcode可自动合成setter方法和getter方法以及实例变量，效果如下所示：<br> <a id="more"></a><br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@synthesize</span> var = _var;</span><br></pre></td></tr></table></figure></p>
+<p>property一般有如下修饰符：</p>
+<h2 id="读写修饰符-readwrite-readonly"><a href="#读写修饰符-readwrite-readonly" class="headerlink" title="读写修饰符:  readwrite  |  readonly"></a>读写修饰符:  readwrite  |  readonly</h2><ul>
+<li>readonly<br>readonly只生成getter方法，并且在其他文件中无法使用getter方法修改属性对应的实例变量的值。但可通过一些措施在.m文件中修改它的值。并且可以通过声明其他的一些方法在其他文件中来改变readonly修饰的属性对应的实例变量的值，但这并不符合面向对象的封装原则，所以并不推荐。</li>
+<li>readwrite<br>readwrite既会合成getter方法也会生成setter方法，是默认修饰符。</li>
+</ul>
+<h2 id="setter相关修饰符-assign-retain-copy-strong-weak"><a href="#setter相关修饰符-assign-retain-copy-strong-weak" class="headerlink" title="setter相关修饰符:  assign  |  retain  |  copy  |  strong  |  weak"></a>setter相关修饰符:  assign  |  retain  |  copy  |  strong  |  weak</h2><ul>
+<li>assign<br>非对象的数据类型默认使用assign修饰。若用来修饰对象，对象的计数器不会+1。而且当对象销毁后，指针不会指向nil，会出现野指针。</li>
+<li>retain<br>在MRC中retain默认修饰对象。</li>
+<li><p>copy<br>对于setter方法它是这样实现的：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>) setVar:(ObjectType *) theVar&#123;</span><br><span class="line"><span class="keyword">if</span> (theVar != var)</span><br><span class="line">var = [theVar <span class="keyword">copy</span>]; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>strong<br>通常，所有对象的指针变量都是强变量。对象的引用赋值给strong修饰的属性时，该对象将会自动保持(新对象计数器+1)，但是旧对象的引用会在赋值前被释放（旧对象计数器-1）。<br>对于setter方法它是这样实现的：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>) setVar:(<span class="built_in">NSString</span> *) theVar&#123;</span><br><span class="line">[theVar retian]; <span class="comment">//theVar指向的对象计数器+1</span></span><br><span class="line">[var release];  <span class="comment">//var指向的对象计数器-1</span></span><br><span class="line">var = theVar;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>weak<br>weak 修饰的引用计数器不会+1。<br>为了防止两个强变量间的循环引用导致retain cycle可以使用weak。<br>当它所指向的对象被销毁时，指向nil。</p>
+</li>
+</ul>
+<p>值得注意的是，对象的属性默认不是strong，而是unsafe_unretained(相当于assign)。</p>
+<p>PS：关于这部分的说明有点混乱，因为对于objc的内存管理机制还是云里雾里，而且被变量和属性以及ARC和MRC绕的有点晕。我想在之后专门学习一下内存管理机制。</p>
+<h2 id="原子性修饰符-atomic-nonatomic"><a href="#原子性修饰符-atomic-nonatomic" class="headerlink" title="原子性修饰符:  atomic  |  nonatomic"></a>原子性修饰符:  atomic  |  nonatomic</h2><ul>
+<li>atomic<br>atomic可以对生成的setter方法加互斥锁，以此保证同一时间只有一个线程调用setter方法 。然而如果不同线程同时调用setter和getter方法时还是会出现问题。所以即使用了atomic修饰也不一定是线程安全的。</li>
+<li>nonatomic<br>与atomic相比较， nonatomic不能对生成的 setter方法加互斥锁， 但是相比较atomic来说，性能要好许多，因为atomic需要耗费许多系统资源。</li>
+</ul>
+<p>属性默认是atomic的。</p>
+<h1 id="synthesize"><a href="#synthesize" class="headerlink" title="synthesize"></a>synthesize</h1><p>sysnthesize的作用是合成setter方法（若属性被readonly修饰则不会生成）以及getter方法，并且声明一个与属性同名的实例变量。</p>
+<h1 id="dynamic"><a href="#dynamic" class="headerlink" title="dynamic"></a>dynamic</h1><p>@dynamic告诉编译器,属性的setter与getter方法由用户自己实现，不自动合成。假如一个属性被声明为@dynamic var，然后你没有提供@setter方法和@getter方法，编译的时候没问题，但是当程序运行setter或getter方法时，会导致程序崩溃。</p>
+<h1 id="关于property的一些问题"><a href="#关于property的一些问题" class="headerlink" title="关于property的一些问题"></a>关于property的一些问题</h1><p>在一些情况下property可能不会自动生成setter和getter方法。如出现</p>
+<blockquote>
+<p>Auto property synthesis will not synthesize property ‘via’ because it is  ‘readwrite’ but it will be synthesized ‘readonly’ via another property</p>
+</blockquote>
+<p>的警告,这是因为声明property时将继承的readonly属性重新声明为readwrite属性, 导致自动合成时发生冲突，针对这种情况有以下几种解决方法：</p>
+<ol>
+<li>可以自己在implement中添加@synthesize。</li>
+<li><p>如果能访问superclass.m文件的话，也可以通过extension在.m文件中加入</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span> ObjectType *var;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>或自己手动实现setter方法。这样就可以在父类中将setter和getter方法同时生成, 然后在子类中通过@dynamic(其实也可以不用，只是用来消除警告)来使用父类中的setter和getter方法。</p>
+</li>
+</ol>
+<p>通过这个问题的研究，我们也就知道如何在.m文件中修改对应readonly属性的实例变量值的办法。如使用extension或自己手动生成setter方法。</p>
+<p>还有一个问题就是如果没有生成setter方法，却在setter方法的实现中使用<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>) setVar:(ObjectType *)theVar&#123;</span><br><span class="line"><span class="keyword">self</span>.var = theVar;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>将会导致死循环。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>通过学习，对之前一些模糊的概念有了深刻的认识。在学习中也接触到了一些关于objc内存管理的机制，感觉自己对于这方面的知识还是很不了解，仍需更加深入的学习。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[iOS开发中页面间传值方法总结]]></title>
       <url>zhanlee.com/2016/06/23/iOS%E5%BC%80%E5%8F%91%E4%B8%AD%E9%A1%B5%E9%9D%A2%E9%97%B4%E4%BC%A0%E5%80%BC%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/</url>
       <content type="html"><![CDATA[<h1 id="iOS页面间传值的方法"><a href="#iOS页面间传值的方法" class="headerlink" title="iOS页面间传值的方法"></a>iOS页面间传值的方法</h1><p>在iOS中页面间传值一般有以下几种方法:</p>

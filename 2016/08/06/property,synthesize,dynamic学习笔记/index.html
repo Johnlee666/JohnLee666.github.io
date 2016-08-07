@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="iOS,学习笔记," />
+  <meta name="keywords" content="iOS,学习笔记,Objective-C," />
 
 
 
@@ -86,43 +86,16 @@
 
 
 
-<meta name="description" content="iOS页面间传值的方法在iOS中页面间传值一般有以下几种方法:
-
-属性传值
-代理传值
-blcok传值
-NSNotification
-NSUserDefaults
-单例传值
-
-可能还有一些其他的方法,这里不再进行详细介绍。这六种方式各有特点，不同的情况下可使用不同的方式，下面我们来看下详细的使用方法。">
+<meta name="description" content="propertyproperty的作用是声明属性的setter方法和getter方法，并且在一般情况下Xcode可自动合成setter方法和getter方法以及实例变量，效果如下所示：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS开发中页面间传值方法总结">
-<meta property="og:url" content="zhanlee.com/2016/06/23/iOS开发中页面间传值方法总结/index.html">
+<meta property="og:title" content="property,synthesize,dynamic学习笔记">
+<meta property="og:url" content="zhanlee.com/2016/08/06/property,synthesize,dynamic学习笔记/index.html">
 <meta property="og:site_name" content="寻梦人">
-<meta property="og:description" content="iOS页面间传值的方法在iOS中页面间传值一般有以下几种方法:
-
-属性传值
-代理传值
-blcok传值
-NSNotification
-NSUserDefaults
-单例传值
-
-可能还有一些其他的方法,这里不再进行详细介绍。这六种方式各有特点，不同的情况下可使用不同的方式，下面我们来看下详细的使用方法。">
-<meta property="og:updated_time" content="2016-08-06T15:55:31.000Z">
+<meta property="og:description" content="propertyproperty的作用是声明属性的setter方法和getter方法，并且在一般情况下Xcode可自动合成setter方法和getter方法以及实例变量，效果如下所示：">
+<meta property="og:updated_time" content="2016-08-06T16:16:11.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS开发中页面间传值方法总结">
-<meta name="twitter:description" content="iOS页面间传值的方法在iOS中页面间传值一般有以下几种方法:
-
-属性传值
-代理传值
-blcok传值
-NSNotification
-NSUserDefaults
-单例传值
-
-可能还有一些其他的方法,这里不再进行详细介绍。这六种方式各有特点，不同的情况下可使用不同的方式，下面我们来看下详细的使用方法。">
+<meta name="twitter:title" content="property,synthesize,dynamic学习笔记">
+<meta name="twitter:description" content="propertyproperty的作用是声明属性的setter方法和getter方法，并且在一般情况下Xcode可自动合成setter方法和getter方法以及实例变量，效果如下所示：">
 
 
 
@@ -143,9 +116,9 @@ NSUserDefaults
 
 
 
-  <link rel="canonical" href="zhanlee.com/2016/06/23/iOS开发中页面间传值方法总结/"/>
+  <link rel="canonical" href="zhanlee.com/2016/08/06/property,synthesize,dynamic学习笔记/"/>
 
-  <title> iOS开发中页面间传值方法总结 | 寻梦人 </title>
+  <title> property,synthesize,dynamic学习笔记 | 寻梦人 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -335,7 +308,7 @@ NSUserDefaults
             
             
               
-                iOS开发中页面间传值方法总结
+                property,synthesize,dynamic学习笔记
               
             
           </h1>
@@ -347,8 +320,8 @@ NSUserDefaults
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-23T13:57:34+08:00" content="2016-06-23">
-              2016-06-23
+            <time itemprop="dateCreated" datetime="2016-08-06T23:43:31+08:00" content="2016-08-06">
+              2016-08-06
             </time>
           </span>
 
@@ -361,8 +334,8 @@ NSUserDefaults
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
+                  <a href="/categories/Objective-C/" itemprop="url" rel="index">
+                    <span itemprop="name">Objective-C</span>
                   </a>
                 </span>
 
@@ -377,8 +350,8 @@ NSUserDefaults
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/06/23/iOS开发中页面间传值方法总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/23/iOS开发中页面间传值方法总结/" itemprop="commentsCount"></span>
+                <a href="/2016/08/06/property,synthesize,dynamic学习笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/06/property,synthesize,dynamic学习笔记/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -406,38 +379,50 @@ NSUserDefaults
       
 
       
-        <h1 id="iOS页面间传值的方法"><a href="#iOS页面间传值的方法" class="headerlink" title="iOS页面间传值的方法"></a>iOS页面间传值的方法</h1><p>在iOS中页面间传值一般有以下几种方法:</p>
+        <h1 id="property"><a href="#property" class="headerlink" title="property"></a>property</h1><p>property的作用是声明属性的setter方法和getter方法，并且在一般情况下Xcode可自动合成setter方法和getter方法以及实例变量，效果如下所示：<br> <a id="more"></a><br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@synthesize</span> var = _var;</span><br></pre></td></tr></table></figure></p>
+<p>property一般有如下修饰符：</p>
+<h2 id="读写修饰符-readwrite-readonly"><a href="#读写修饰符-readwrite-readonly" class="headerlink" title="读写修饰符:  readwrite  |  readonly"></a>读写修饰符:  readwrite  |  readonly</h2><ul>
+<li>readonly<br>readonly只生成getter方法，并且在其他文件中无法使用getter方法修改属性对应的实例变量的值。但可通过一些措施在.m文件中修改它的值。并且可以通过声明其他的一些方法在其他文件中来改变readonly修饰的属性对应的实例变量的值，但这并不符合面向对象的封装原则，所以并不推荐。</li>
+<li>readwrite<br>readwrite既会合成getter方法也会生成setter方法，是默认修饰符。</li>
+</ul>
+<h2 id="setter相关修饰符-assign-retain-copy-strong-weak"><a href="#setter相关修饰符-assign-retain-copy-strong-weak" class="headerlink" title="setter相关修饰符:  assign  |  retain  |  copy  |  strong  |  weak"></a>setter相关修饰符:  assign  |  retain  |  copy  |  strong  |  weak</h2><ul>
+<li>assign<br>非对象的数据类型默认使用assign修饰。若用来修饰对象，对象的计数器不会+1。而且当对象销毁后，指针不会指向nil，会出现野指针。</li>
+<li>retain<br>在MRC中retain默认修饰对象。</li>
+<li><p>copy<br>对于setter方法它是这样实现的：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>) setVar:(ObjectType *) theVar&#123;</span><br><span class="line"><span class="keyword">if</span> (theVar != var)</span><br><span class="line">var = [theVar <span class="keyword">copy</span>]; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>strong<br>通常，所有对象的指针变量都是强变量。对象的引用赋值给strong修饰的属性时，该对象将会自动保持(新对象计数器+1)，但是旧对象的引用会在赋值前被释放（旧对象计数器-1）。<br>对于setter方法它是这样实现的：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>) setVar:(<span class="built_in">NSString</span> *) theVar&#123;</span><br><span class="line">[theVar retian]; <span class="comment">//theVar指向的对象计数器+1</span></span><br><span class="line">[var release];  <span class="comment">//var指向的对象计数器-1</span></span><br><span class="line">var = theVar;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>weak<br>weak 修饰的引用计数器不会+1。<br>为了防止两个强变量间的循环引用导致retain cycle可以使用weak。<br>当它所指向的对象被销毁时，指向nil。</p>
+</li>
+</ul>
+<p>值得注意的是，对象的属性默认不是strong，而是unsafe_unretained(相当于assign)。</p>
+<p>PS：关于这部分的说明有点混乱，因为对于objc的内存管理机制还是云里雾里，而且被变量和属性以及ARC和MRC绕的有点晕。我想在之后专门学习一下内存管理机制。</p>
+<h2 id="原子性修饰符-atomic-nonatomic"><a href="#原子性修饰符-atomic-nonatomic" class="headerlink" title="原子性修饰符:  atomic  |  nonatomic"></a>原子性修饰符:  atomic  |  nonatomic</h2><ul>
+<li>atomic<br>atomic可以对生成的setter方法加互斥锁，以此保证同一时间只有一个线程调用setter方法 。然而如果不同线程同时调用setter和getter方法时还是会出现问题。所以即使用了atomic修饰也不一定是线程安全的。</li>
+<li>nonatomic<br>与atomic相比较， nonatomic不能对生成的 setter方法加互斥锁， 但是相比较atomic来说，性能要好许多，因为atomic需要耗费许多系统资源。</li>
+</ul>
+<p>属性默认是atomic的。</p>
+<h1 id="synthesize"><a href="#synthesize" class="headerlink" title="synthesize"></a>synthesize</h1><p>sysnthesize的作用是合成setter方法（若属性被readonly修饰则不会生成）以及getter方法，并且声明一个与属性同名的实例变量。</p>
+<h1 id="dynamic"><a href="#dynamic" class="headerlink" title="dynamic"></a>dynamic</h1><p>@dynamic告诉编译器,属性的setter与getter方法由用户自己实现，不自动合成。假如一个属性被声明为@dynamic var，然后你没有提供@setter方法和@getter方法，编译的时候没问题，但是当程序运行setter或getter方法时，会导致程序崩溃。</p>
+<h1 id="关于property的一些问题"><a href="#关于property的一些问题" class="headerlink" title="关于property的一些问题"></a>关于property的一些问题</h1><p>在一些情况下property可能不会自动生成setter和getter方法。如出现</p>
+<blockquote>
+<p>Auto property synthesis will not synthesize property ‘via’ because it is  ‘readwrite’ but it will be synthesized ‘readonly’ via another property</p>
+</blockquote>
+<p>的警告,这是因为声明property时将继承的readonly属性重新声明为readwrite属性, 导致自动合成时发生冲突，针对这种情况有以下几种解决方法：</p>
 <ol>
-<li>属性传值</li>
-<li>代理传值</li>
-<li>blcok传值</li>
-<li>NSNotification</li>
-<li>NSUserDefaults</li>
-<li>单例传值</li>
+<li>可以自己在implement中添加@synthesize。</li>
+<li><p>如果能访问superclass.m文件的话，也可以通过extension在.m文件中加入</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span> ObjectType *var;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>或自己手动实现setter方法。这样就可以在父类中将setter和getter方法同时生成, 然后在子类中通过@dynamic(其实也可以不用，只是用来消除警告)来使用父类中的setter和getter方法。</p>
+</li>
 </ol>
-<p>可能还有一些其他的方法,这里不再进行详细介绍。这六种方式各有特点，不同的情况下可使用不同的方式，下面我们来看下详细的使用方法。<br> <a id="more"></a></p>
-<h2 id="一-属性传值"><a href="#一-属性传值" class="headerlink" title="一. 属性传值"></a>一. 属性传值</h2><p>属性传值一般适用于将值从前一视图向后一视图传递。而属性传值的代码也非常简单，先在第二个视图类中声明一个属性：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;UIKit/UIKit.h&gt;</span><br><span class="line">interface SecondViewController : UIViewController</span><br><span class="line">property NSString *string;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure></p>
-<p>然后在第一个视图的实现类中进行传值操作：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-(void)passData&#123;</span><br><span class="line">SecondViewController *secondVC = [[SecondViewController alloc]init];</span><br><span class="line">secondVC.string = self.textField.text;</span><br><span class="line">[self.navigationController pushViewController:second animated:YES];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="二-代理传值"><a href="#二-代理传值" class="headerlink" title="二. 代理传值"></a>二. 代理传值</h2><p>代理模式是一种简单的设计模式，在iOS开发中可通过协议来实现<br>使用代理既可以用于正向也可以用于反向传值，下面以反向传值为例。<br>首先在第二个页面的类中声明协议，以及一个id类型的delegate属性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;UIKit/UIKit.h&gt;</span><br><span class="line">@protocol backProtocol &lt;NSObject&gt;</span><br><span class="line">-(void) backPass:(NSString *)string;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@interface SecondViewController : UIViewController</span><br><span class="line">@property id &lt;backProtocol&gt; delegate;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure></p>
-<p>之后在实现文件中调用代理方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if ([self.delegate respondsToSelector:@selector(backPass:)])</span><br><span class="line">&#123;</span><br><span class="line">[self.delegate backPass:self.textField.text];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>最后在第一个页面中声明遵守这一协议，并将自己设为代理，然后实现这一协议中的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">secondVC.delegate = self;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-(void)backPass:(NSString *)string&#123;</span><br><span class="line">self.textField.text = string;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这样简单的代理就完成了，它实现了将第二个页面中textField的值传入第一个页面的textField中。如果想更深入的了解代理模式，请<a href="http://www.cocoachina.com/ios/20160317/15696.html" target="_blank" rel="external">戳这里</a></p>
-<h2 id="三-block传值"><a href="#三-block传值" class="headerlink" title="三. block传值"></a>三. block传值</h2><p>block本质上和其他变量类似，只不过block中存储的数据是一个函数体，你可以把它想象成是一个指向函数的指针，但其实这两者也有许多不同。如果想深入了解block语法的内容，可以看下<a href="http://www.devtalking.com/articles/you-should-know-block/" target="_blank" rel="external">这篇文章</a>。<br>现在介绍简单的反向传值。首先在第二个类中声明block属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;UIKit/UIKit.h&gt;</span><br><span class="line">typedef void(^passValueBlock)(NSString *blockString);</span><br><span class="line">@interface SecondViewController : UIViewController</span><br><span class="line">@property(nonatomic,copy) passValueBlock block;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure></p>
-<p>然后在实现文件中传值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.block(self.textField.text);</span><br></pre></td></tr></table></figure></p>
-<p>最后在第一个页面中实现block方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">secondVC.block = ^(NSString *string)&#123;</span><br><span class="line">self.textField.text = string;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>这样就实现了将第二个页面的textField的值传入第一个页面的textField中。</p>
-<h2 id="四-NSNotification传值"><a href="#四-NSNotification传值" class="headerlink" title="四. NSNotification传值"></a>四. NSNotification传值</h2><p>NSNotification其实就是在iOS中对观察者模式的一种实现。而通过NSNotification传值则非常简单。<br>首先就是在需要传值的类中发送通知<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[NSNotificationCenter defaultCenter]postNotificationName:@&quot;passData&quot; object:self.textField.text];</span><br></pre></td></tr></table></figure></p>
-<p>然后在其他类中添加观察者并实现方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(passData:) name:@&quot;passData&quot; object:nil];</span><br><span class="line"></span><br><span class="line">-(void)passData:(NSNotification *)data&#123;</span><br><span class="line">self.textField.text = data.object;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>最后不要忘了在dealloc方法中撤销通知中心，以免资源的浪费<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-(void)dealloc&#123;</span><br><span class="line">[[NSNotificationCenter defaultCenter] removeObserver:self];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="五-NSUserDefaults"><a href="#五-NSUserDefaults" class="headerlink" title="五. NSUserDefaults"></a>五. NSUserDefaults</h2><p>NSUserDefaults在iOS开发中主要用于存储轻量数据，用于数据持久化。但是也可以用它进行页面间的传值<br>首先在一个界面中进行存储操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];</span><br><span class="line">[defaults setObject:self.textField.text forKey:@&quot;string&quot;];</span><br></pre></td></tr></table></figure></p>
-<p>然后在另一个页面中进行读取操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];</span><br><span class="line">self.textField.text = [defaults objectForKey:@&quot;string&quot;];</span><br></pre></td></tr></table></figure></p>
-<p>关于NSUserDefaults的更多内容，请点击<a href="http://www.jianshu.com/p/459c15cf6ce2" target="_blank" rel="external">这里</a></p>
-<h2 id="六-单例传值"><a href="#六-单例传值" class="headerlink" title="六. 单例传值"></a>六. 单例传值</h2><p>首先新建一个单例类<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;Foundation/Foundation.h&gt;</span><br><span class="line"></span><br><span class="line">@interface DataManager : NSObject</span><br><span class="line">+(instancetype)Default;</span><br><span class="line">@property(nonatomic,strong) NSString *string;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;DataManager.h&quot;</span><br><span class="line">static DataManager *manger = nil;</span><br><span class="line">@implementation DataManager</span><br><span class="line">+(instancetype)Default&#123;</span><br><span class="line">static dispatch_once_t onceToken;</span><br><span class="line">dispatch_once(&amp;onceToken,^&#123;</span><br><span class="line">manger = [[DataManager alloc]init];</span><br><span class="line">&#125;);</span><br><span class="line">return manger;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
-<p>然后便可通过属性string进行传值<br>先在一个页面中将值传入单例manager中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DataManager *manager = [DataManager Default];</span><br><span class="line">manager.string = self.textField.text;</span><br></pre></td></tr></table></figure></p>
-<p>再在另一个页面通过它传给其他对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DataManager *manager = [DataManager Default];</span><br><span class="line">self.textField.text = manager.string;</span><br></pre></td></tr></table></figure></p>
-<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p><del>真是越到期末我越浪。在期末考前还在写博客，也真是作死呀。</del> 不过通过这第一次写技术博客的经历，感觉对知识又有了更深入的理解，并且能把自己的笔记分享出来，感觉也是非常的棒。当然笔记中难免有许多错误，也烦请读者不吝指出。最后，要赶紧滚去复习了，逃~</p>
+<p>通过这个问题的研究，我们也就知道如何在.m文件中修改对应readonly属性的实例变量值的办法。如使用extension或自己手动生成setter方法。</p>
+<p>还有一个问题就是如果没有生成setter方法，却在setter方法的实现中使用<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>) setVar:(ObjectType *)theVar&#123;</span><br><span class="line"><span class="keyword">self</span>.var = theVar;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>将会导致死循环。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>通过学习，对之前一些模糊的概念有了深刻的认识。在学习中也接触到了一些关于objc内存管理的机制，感觉自己对于这方面的知识还是很不了解，仍需更加深入的学习。</p>
 
       
     </div>
@@ -463,6 +448,8 @@ NSUserDefaults
           
             <a href="/tags/学习笔记/" rel="tag">#学习笔记</a>
           
+            <a href="/tags/Objective-C/" rel="tag">#Objective-C</a>
+          
         </div>
       
 
@@ -470,17 +457,13 @@ NSUserDefaults
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/06/09/博客搭建/" rel="next" title="纪念第一次博客搭建">
-                <i class="fa fa-chevron-left"></i> 纪念第一次博客搭建
+              <a href="/2016/06/23/iOS开发中页面间传值方法总结/" rel="next" title="iOS开发中页面间传值方法总结">
+                <i class="fa fa-chevron-left"></i> iOS开发中页面间传值方法总结
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/08/06/property,synthesize,dynamic学习笔记/" rel="prev" title="property,synthesize,dynamic学习笔记">
-                property,synthesize,dynamic学习笔记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -495,10 +478,10 @@ NSUserDefaults
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/06/23/iOS开发中页面间传值方法总结/"
-     data-title="iOS开发中页面间传值方法总结"
+        <div class="ds-share flat" data-thread-key="2016/08/06/property,synthesize,dynamic学习笔记/"
+     data-title="property,synthesize,dynamic学习笔记"
      data-content=""
-     data-url="zhanlee.com/2016/06/23/iOS开发中页面间传值方法总结/">
+     data-url="zhanlee.com/2016/08/06/property,synthesize,dynamic学习笔记/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -525,8 +508,8 @@ NSUserDefaults
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/06/23/iOS开发中页面间传值方法总结/"
-           data-title="iOS开发中页面间传值方法总结" data-url="zhanlee.com/2016/06/23/iOS开发中页面间传值方法总结/">
+      <div class="ds-thread" data-thread-key="2016/08/06/property,synthesize,dynamic学习笔记/"
+           data-title="property,synthesize,dynamic学习笔记" data-url="zhanlee.com/2016/08/06/property,synthesize,dynamic学习笔记/">
       </div>
     
   </div>
@@ -698,7 +681,7 @@ NSUserDefaults
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#iOS页面间传值的方法"><span class="nav-number">1.</span> <span class="nav-text">iOS页面间传值的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-属性传值"><span class="nav-number">1.1.</span> <span class="nav-text">一. 属性传值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-代理传值"><span class="nav-number">1.2.</span> <span class="nav-text">二. 代理传值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-block传值"><span class="nav-number">1.3.</span> <span class="nav-text">三. block传值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-NSNotification传值"><span class="nav-number">1.4.</span> <span class="nav-text">四. NSNotification传值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五-NSUserDefaults"><span class="nav-number">1.5.</span> <span class="nav-text">五. NSUserDefaults</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六-单例传值"><span class="nav-number">1.6.</span> <span class="nav-text">六. 单例传值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#后记"><span class="nav-number">2.</span> <span class="nav-text">后记</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#property"><span class="nav-number">1.</span> <span class="nav-text">property</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#读写修饰符-readwrite-readonly"><span class="nav-number">1.1.</span> <span class="nav-text">读写修饰符:  readwrite  |  readonly</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#setter相关修饰符-assign-retain-copy-strong-weak"><span class="nav-number">1.2.</span> <span class="nav-text">setter相关修饰符:  assign  |  retain  |  copy  |  strong  |  weak</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原子性修饰符-atomic-nonatomic"><span class="nav-number">1.3.</span> <span class="nav-text">原子性修饰符:  atomic  |  nonatomic</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#synthesize"><span class="nav-number">2.</span> <span class="nav-text">synthesize</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dynamic"><span class="nav-number">3.</span> <span class="nav-text">dynamic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于property的一些问题"><span class="nav-number">4.</span> <span class="nav-text">关于property的一些问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
         </section>
