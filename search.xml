@@ -5,7 +5,7 @@
     
     <entry>
       <title><![CDATA[iOS中的pt和px]]></title>
-      <url>zhanlee.com/2017/08/09/iOS%E4%B8%AD%E7%9A%84pt%E5%92%8Cpx/</url>
+      <url>http://yoursite.com/2017/08/09/iOS%E4%B8%AD%E7%9A%84pt%E5%92%8Cpx/</url>
       <content type="html"><![CDATA[<h1 id="iOS关于px和pt的一些问题"><a href="#iOS关于px和pt的一些问题" class="headerlink" title="iOS关于px和pt的一些问题"></a>iOS关于px和pt的一些问题</h1><h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>最近在还原psd设计图的时候遇到一些问题，就是设计图上给的距离都是px而在iOS开发中却可能用到pt这个单位。那这两者的换算关系是什么呢。之前的话直接都是把视觉稿的px除以2当pt来用，也没有深究为什么。这几天想深入了解一下，但是网上资料鱼龙混杂，一些错误的概念充斥其间，所以想写篇文章来好好理一理其中的一些关系。这之前需要先解释几个概念:</p>
 <a id="more"></a>
 <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ul>
@@ -51,7 +51,7 @@
     
     <entry>
       <title><![CDATA[property,synthesize,dynamic学习笔记]]></title>
-      <url>zhanlee.com/2016/08/06/property,synthesize,dynamic%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+      <url>http://yoursite.com/2016/08/06/property,synthesize,dynamic%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
       <content type="html"><![CDATA[<h1 id="property"><a href="#property" class="headerlink" title="property"></a>property</h1><p>property的作用是声明属性的setter方法和getter方法，并且在一般情况下Xcode可自动合成setter方法和getter方法以及实例变量，效果如下所示：<br> <a id="more"></a><br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@synthesize</span> var = _var;</span><br></pre></td></tr></table></figure></p>
 <p>property一般有如下修饰符：</p>
 <h2 id="读写修饰符-readwrite-readonly"><a href="#读写修饰符-readwrite-readonly" class="headerlink" title="读写修饰符:  readwrite  |  readonly"></a>读写修饰符:  readwrite  |  readonly</h2><ul>
@@ -101,7 +101,7 @@
     
     <entry>
       <title><![CDATA[iOS开发中页面间传值方法总结]]></title>
-      <url>zhanlee.com/2016/06/23/iOS%E5%BC%80%E5%8F%91%E4%B8%AD%E9%A1%B5%E9%9D%A2%E9%97%B4%E4%BC%A0%E5%80%BC%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/</url>
+      <url>http://yoursite.com/2016/06/23/iOS%E5%BC%80%E5%8F%91%E4%B8%AD%E9%A1%B5%E9%9D%A2%E9%97%B4%E4%BC%A0%E5%80%BC%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/</url>
       <content type="html"><![CDATA[<h1 id="iOS页面间传值的方法"><a href="#iOS页面间传值的方法" class="headerlink" title="iOS页面间传值的方法"></a>iOS页面间传值的方法</h1><p>在iOS中页面间传值一般有以下几种方法:</p>
 <ol>
 <li>属性传值</li>
@@ -139,7 +139,7 @@
     
     <entry>
       <title><![CDATA[纪念第一次博客搭建]]></title>
-      <url>zhanlee.com/2016/06/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</url>
+      <url>http://yoursite.com/2016/06/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</url>
       <content type="html"><![CDATA[<p>折腾了一天，总算把博客搭建完成了。希望以后能在这多写点东西，记录下自己的成长历程<br>。也希望我的分享可以带给大家一些有用的东西。<br> <a id="more"></a><br>谨以此文纪念在异乡的第一个端午。</p>
 ]]></content>
     </entry>
