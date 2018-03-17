@@ -4,6 +4,112 @@
   
     
     <entry>
+      <title><![CDATA[纪念第一次博客搭建]]></title>
+      <url>http://lizhan.me/2018/03/18/iOS%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</url>
+      <content type="html"><![CDATA[<h1 id="iOS内存管理"><a href="#iOS内存管理" class="headerlink" title="iOS内存管理"></a>iOS内存管理</h1><h2 id="什么是自动引用计数（ARC）"><a href="#什么是自动引用计数（ARC）" class="headerlink" title="什么是自动引用计数（ARC）"></a>什么是自动引用计数（ARC）</h2><blockquote>
+<p>在LLVM编译器中设置ARC为有效状态，就无需再次键入retain或者是release代码</p>
+<ul>
+<li>使用Xcode4.2或以上版本</li>
+<li>使用LLVM编译器3.0或以上版本</li>
+<li>编译器选项中设置ARC为有效</li>
+<li>引用树根对象(NSApplication/UIApplication)<a id="more"></a>
+<h2 id="内存管理的思考方式"><a href="#内存管理的思考方式" class="headerlink" title="内存管理的思考方式"></a>内存管理的思考方式</h2></li>
+</ul>
+<ol>
+<li>自己生成的对象，自己持有</li>
+</ol>
+<ul>
+<li>alloc</li>
+<li>new</li>
+<li>copy</li>
+<li>mutableCopy</li>
+<li><strong><em>注意驼峰命名</em></strong></li>
+</ul>
+<ol>
+<li>非自己生成的对象，自己也能持有</li>
+</ol>
+<ul>
+<li>array</li>
+<li>init返回的对象不会注册到自动释放池中</li>
+<li>autorelease</li>
+</ul>
+<ol>
+<li>不再需要自己持有的对象时释放</li>
+</ol>
+<ul>
+<li>release之后清空指针（避免悬挂指针的出现）</li>
+</ul>
+</blockquote>
+<ol>
+<li>非自己持有的对象无法释放</li>
+</ol>
+<ul>
+<li>释放非自己持有的对象可能会造成程序崩溃（放回可用内存池）</li>
+</ul>
+<h2 id="alloc-retain-release-autorelease-dealloc实现"><a href="#alloc-retain-release-autorelease-dealloc实现" class="headerlink" title="alloc/retain/release/autorelease/dealloc实现"></a>alloc/retain/release/autorelease/dealloc实现</h2><h3 id="GNUstep框架"><a href="#GNUstep框架" class="headerlink" title="GNUstep框架"></a><a href="https://github.com/gnustep/libs-base/edit/master/Source/NSObject.m" target="_blank" rel="external">GNUstep框架</a></h3><ul>
+<li>GNUstep是Cocoa的互换框架</li>
+<li>alloc</li>
+<li>allocWithZone</li>
+</ul>
+<h3 id="苹果的实现"><a href="#苹果的实现" class="headerlink" title="苹果的实现"></a><a href="https://opensource.apple.com/source/objc4/objc4-723/runtime/" target="_blank" rel="external">苹果的实现</a></h3><ul>
+<li>散列表</li>
+</ul>
+<h3 id="ARC下的规则"><a href="#ARC下的规则" class="headerlink" title="ARC下的规则"></a>ARC下的规则</h3><ol>
+<li>不能使用alloc/retain/release/autorelease(ARC直接使用C语言函数)</li>
+<li>不能使用NSAllocateObject/NSDeallocateObject</li>
+<li>须遵守内存管理的方法命名规则</li>
+<li>不要显式调用dealloc</li>
+<li>使用@autoreleasepool块替代NSAutoreleasePool</li>
+<li>不能使用区域（NSZone）</li>
+<li>对象型变量不能作为C语言结构体(struct/union)的成员</li>
+<li>显示转换id和void*</li>
+</ol>
+<h2 id="所有权修饰符"><a href="#所有权修饰符" class="headerlink" title="所有权修饰符"></a>所有权修饰符</h2><ul>
+<li>__strong</li>
+<li>__weak（保留环）</li>
+<li>__unsafe_unretained</li>
+<li>__autoreleasing</li>
+<li>一般不显式声明</li>
+<li>对象作为函数返回值，自动注册到autoreleasepool</li>
+<li>在访问附有__weak修饰符的变量时，实际上必定要访问注册到autoreleasepool的对象</li>
+<li>id的指针或对象的指针在没有显式指定时会被附加上__autoreleasing修饰符（NSError）</li>
+<li>与属性修饰符的关系（保留新值，释放旧值，设置实例变量）<h3 id="不要使用retainCount"><a href="#不要使用retainCount" class="headerlink" title="不要使用retainCount"></a>不要使用retainCount</h3></li>
+<li>考虑autorealease</li>
+<li>在保留计数还是1的时候可能就回收了</li>
+</ul>
+<h2 id="在dealloc方法中只释放引用并解除监听"><a href="#在dealloc方法中只释放引用并解除监听" class="headerlink" title="在dealloc方法中只释放引用并解除监听"></a>在dealloc方法中只释放引用并解除监听</h2><ul>
+<li>自动调用析构函数</li>
+<li>取消KVO和通知</li>
+<li>malloc()分配在堆上的内存和CoreFoundation中的对象</li>
+<li>系统未必会在每个对象上调用其dealloc方法<h2 id="使用autoreleasepool降低内存峰值"><a href="#使用autoreleasepool降低内存峰值" class="headerlink" title="使用autoreleasepool降低内存峰值"></a>使用autoreleasepool降低内存峰值</h2></li>
+<li>每次runloop释放自动释放池</li>
+<li>自己在循环中创建池</li>
+</ul>
+<h2 id="ARC的实现"><a href="#ARC的实现" class="headerlink" title="ARC的实现"></a>ARC的实现</h2><ul>
+<li>objc_retainAutoReleasedReturnValue</li>
+<li>objc_autoreleaseReturnValue</li>
+<li>__weak修饰符置nil的实现</li>
+</ul>
+<ol>
+<li>从weak表中获取废弃对象的地址为键值的记录</li>
+<li>将包含在记录中的所有附有__weak修饰符变量的地址，赋值为nil</li>
+<li>从weak表中删除该记录</li>
+<li>从引用计数表中删除废弃对象的地址为键值的记录</li>
+</ol>
+<ul>
+<li>不支持__weak修饰符的类(NSMachPort)</li>
+<li>allowsWeakReference/retainWeakRefence方法</li>
+</ul>
+<h2 id="用僵尸对象调试管理内存"><a href="#用僵尸对象调试管理内存" class="headerlink" title="用僵尸对象调试管理内存"></a>用僵尸对象调试管理内存</h2><ul>
+<li>对象转化为僵尸对象但不会彻底回收</li>
+<li>僵尸类是从名为<em>NSZombie</em>的模板类里复制出来的</li>
+<li>系统会修改对象的isa指针，令其指向特殊的僵尸类<h2 id="使用Instruments调试"><a href="#使用Instruments调试" class="headerlink" title="使用Instruments调试"></a>使用Instruments调试</h2></li>
+<li>使用Leak来查看内存泄露</li>
+</ul>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[iOS中的pt和px]]></title>
       <url>http://lizhan.me/2017/08/09/iOS%E4%B8%AD%E7%9A%84pt%E5%92%8Cpx/</url>
       <content type="html"><![CDATA[<h1 id="iOS关于px和pt的一些问题"><a href="#iOS关于px和pt的一些问题" class="headerlink" title="iOS关于px和pt的一些问题"></a>iOS关于px和pt的一些问题</h1><h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>最近在还原psd设计图的时候遇到一些问题，就是设计图上给的距离都是px而在iOS开发中却可能用到pt这个单位。那这两者的换算关系是什么呢。之前的话直接都是把视觉稿的px除以2当pt来用，也没有深究为什么。这几天想深入了解一下，但是网上资料鱼龙混杂，一些错误的概念充斥其间，所以想写篇文章来好好理一理其中的一些关系。这之前需要先解释几个概念:</p>
